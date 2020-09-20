@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var express = require('express');
 var mongoose = require('mongoose');
 var app = express();
@@ -28,3 +29,6 @@ var port = 3000;
 app.listen(port, function(){ //3000번 포트에 node.js 서버 연결
   console.log('server on! http://localhost:'+port);
 });
+=======
+55555
+>>>>>>> cae1b46934f38a684e16a524861492e65bc3224b
