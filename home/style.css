@@ -1,75 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+  
 
-#header {
-    width: 1400px;
-    height: 500px;
-    border: 1px;
+body {              /* 바디 폰트 종류 */
+    font-family: 'Do Hyeon', sans-serif;
     background-image:url('bg.jpg');
-    padding: 10px;
+    background-repeat: no-repeat;
+    background-position: top;
+    margin: 0; padding: 0;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Do Hyeon', sans-serif;
-}
 
-ul {
+#main-menu {                /* 메뉴바 여백 설정 및 점 제거 */
+    margin: 0; padding: 0;
     list-style: none;
     display: table;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-#main-menu > ul {
-    list-style: none;
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
+#bachelor {             /* 앞 여백 */
+    padding-left: 210px;
 }
 
-#main-menu
-#sub-menu {
-    position: absolute;
-    background: #0e0c94;
-    opacity: 0;
-    visibility: hidden;
-    margin: 0;
-    padding: 8px 28px;
-    list-style-type: none;
-    font-family: 'Do Hyeon', sans-serif;
-    font-size: 17px;
+#domitory {             /* 뒤 여백 */
+    padding-right: 219px;
 }
+
 
 #main-menu > li {
     float: left;
     background: #ffffff;
-    border: 1px; solid red;
-    font-family: 'Do Hyeon', sans-serif;
-    opacity: 0.7;
+    border: 1px;
+    opacity: 0.77;
 }
 
 #main-menu > li > a {
-    font-size: 22px;
-    color: darkblue;
+    font-size: 24px;
+    color: #0000B7;
     text-decoration: none;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     display: block;
     padding: 15px 40px;
-    border-right: 1px solid rgba(0,0,0,0.15);
     text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
     text-align: center;
-}
-
-#sub-menu > li {
-    padding: 10px 16px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15)
-}
-
-#sub-menu > li > a {
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-
 }
 
 #main-menu > li:hover #sub-menu {
@@ -79,9 +50,60 @@ ul {
 }
 
 #main-menu > li > a:hover {
-    color: rgb(0, 81, 255);
+    color: #00B4DB;
+}
+
+
+#sub-menu {             /* 하위 메뉴바 CSS */
+    position: absolute;
+    background: #0000B7;
+    opacity: 0;
+    visibility: hidden;
+    margin: 0;
+    padding: 8px 26px;
+    list-style-type: none;
+
+}
+
+#sub-menu > li {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#sub-menu > li > a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 18px;
 }
 
 #sub-menu > li > a:hover {
     color: #ffffff
+}
+
+
+table {              /* 게시판 */
+    border-collapse: collapse;
+    width: 1100px;
+    height: 600px;
+    background-color: #FDFFFF;
+    color: #363636; 
+}
+
+#board-title {
+    padding: 15px;
+    font-size: 26px;
+}
+
+#board-navi {
+    background-color: #EBF7FF;
+}
+
+tr {
+    border-bottom: 1px solid #A2A2A2;
+}
+
+
+footer {                /* 하단 저작권 명시 */
+    text-align: center;
 }
