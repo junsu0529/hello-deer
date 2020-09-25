@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+
+body {              /* 바디 폰트 종류 */
+    font-family: 'Do Hyeon', sans-serif;
+    background-image:url('/images/bg.jpg');
+    background-repeat: no-repeat;
+    background-position: top;
+    margin: 0; padding: 0;
+}
+
+
+#main-menu {                /* 메뉴바 여백 설정 및 점 제거 */
+    margin: 0; padding: 0;
+    list-style: none;
+    display: table;
+}
+
+#bachelor {             /* 앞 여백 */
+    padding-left: 210px;
+}
+
+#domitory {             /* 뒤 여백 */
+    padding-right: 219px;
+}
+
+
+#main-menu > li {
+    float: left;
+    background: #ffffff;
+    border: 1px;
+    opacity: 0.77;
+}
+
+#main-menu > li > a {
+    font-size: 24px;
+    color: #0000B7;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    display: block;
+    padding: 15px 40px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+#main-menu > li:hover #sub-menu {
+    opacity: 0.7;
+    visibility: visible;
+    transition: 0.6s;
+}
+
+#main-menu > li > a:hover {
+    color: #00B4DB;
+}
+
+
+#sub-menu {             /* 하위 메뉴바 CSS */
+    position: absolute;
+    background: #0000B7;
+    opacity: 0;
+    visibility: hidden;
+    margin: 0;
+    padding: 8px 26px;
+    list-style-type: none;
+
+}
+
+#sub-menu > li {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#sub-menu > li > a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 18px;
+}
+
+#sub-menu > li > a:hover {
+    color: #ffffff
+}
+
+
+table {              /* 게시판 */
+    border-collapse: collapse;
+    width: 1100px;
+    height: 600px;
+    background-color: #FDFFFF;
+    color: #363636;
+}
+
+#board-title {
+    padding: 15px;
+    font-size: 26px;
+}
+
+#board-navi {
+    background-color: #EBF7FF;
+}
+
+tr {
+    border-bottom: 1px solid #A2A2A2;
+}
+
+
+footer {                /* 하단 저작권 명시 */
+    text-align: center;
+}
