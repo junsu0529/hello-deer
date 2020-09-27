@@ -7,30 +7,29 @@
     <%- include('../partials/nav') %>
 
     <div class="container mb-3">
-
+<br><br><br>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb p-1 pl-2 pr-2">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/posts">Board</a></li>
-          <li class="breadcrumb-item active" aria-current="page">New Post</li>
+          <li class="breadcrumb-item"><a href="/" id="board-mini-nav">전체글 보기</a></li>
+          <li class="breadcrumb-item"><a href="/posts" id="board-mini-nav">게시판 이름</a></li>
         </ol>
       </nav>
 
       <form action="/posts" method="post">
 
         <div class="form-group">
-          <label for="title">Title</label>
+          <label for="title" id="new-title">제목</label>
           <input type="text" id="title" name="title" value="" class="form-control">
         </div>
 
         <div class="form-group">
-          <label for="body">Body</label>
+          <label for="body" id="new-body">내용</label>
           <textarea id="body" name="body" rows="5" class="form-control"></textarea>
         </div>
 
         <div>
-          <a class="btn btn-primary" href="/posts">Back</a>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <a class="btn btn-outline-primary" href="/posts" id="new-back">취소</a>
+          <button type="submit" class="btn btn-primary" id="new-submit">등록</button>
         </div>
 
       </form>

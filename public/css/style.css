@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
 
 
-body {              /* 바디 폰트 종류 */
+body {
     font-family: 'Nanum Gothic', sans-serif;
     background-image:url('/images/bg.jpg');
     background-size: auto;
@@ -149,16 +149,33 @@ h5 {
 #title-data-s {
     font-size: 15px;
     color: #525252;
-    margin-left: 640px;
-    margin-right: auto;
 }
 
-nav > ol > li > a {
+
+#board-mini-nav:hover {
+    color: #37ace2;
+    text-decoration: none;
+}
+
+#board-mini-nav {
     color: #003980;
     text-decoration: none;
 }
 
-nav > ol > li > a:hover {
+#new-btn, #new-submit, #new-back, #btns {
+    font-size: 13px;
+}
+
+#new-title, #new-body {
+    font-size: 23px;
+}
+
+#edit-nav-title {
     color: #37ace2;
+    text-decoration: none;
+}
+
+#edit-nav-title:hover {
+    color: #003980;
     text-decoration: none;
 }
