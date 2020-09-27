@@ -5,17 +5,20 @@
   </head>
   <body>
     <%- include('../partials/nav') %>
-
+<br><br>
     <div class="container mb-3">
 
-      <h2 class="mb-3">Board</h2>
+      <h2 class="mb-3">게시판 이름</h2>
 
       <table class="board-table table table-sm border-bottom">
 
-        <thead class="thead-light">
+        <thead class="thead">
           <tr>
-            <th scope="col">Title</th>
+            <th scope="col">번호</th>
+            <th scope="col">제목</th>
             <th scope="col" class="date">Date</th>
+            <th scope="col">추천수</th>
+            <th scope="col">조회수</th>
           </tr>
         </thead>
 
@@ -27,12 +30,15 @@
           <% } %>
           <% posts.forEach(function(post) { %>
             <tr>
-              <td>
+              <td>1</td>
+              <td id="board-title-list">
                 <a href="/posts/<%= post._id %>"><div class="ellipsis"><%= post.title %></div></a>
               </td>
               <td class="date">
                 <span data-date="<%= post.createdAt %>"></span>
               </td>
+              <td>77</td>
+              <td>777</td>
             </tr>
           <% }) %>
         </tbody>
@@ -44,11 +50,6 @@
       </div>
 
     </div>
+    <%- include('../partials/footer') %>
   </body>
-  <footer>
-      <hr> <!--하단 선-->
-      <br>
-      Copyright © Hello, 사슴 All Rights Reserved.
-      <br><br>
-  </footer>
 </html>

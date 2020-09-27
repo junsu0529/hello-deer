@@ -1,44 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
 
 
 body {              /* 바디 폰트 종류 */
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     background-image:url('/images/bg.jpg');
+    background-size: auto;
     background-repeat: no-repeat;
     background-position: top;
     margin: 0; padding: 0;
 }
 
-
 #main-menu {                /* 메뉴바 여백 설정 및 점 제거 */
-    margin: 0; padding: 0;
     list-style: none;
     display: table;
+    margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;
 }
 
-#bachelor {             /* 앞 여백 */
-    padding-left: 210px;
+nav {
+    background-color: white;
+    opacity: 0.8;
 }
-
-#domitory {             /* 뒤 여백 */
-    padding-right: 219px;
-}
-
 
 #main-menu > li {
     float: left;
-    background: #ffffff;
-    border: 1px;
-    opacity: 0.77;
+    background: transparent;
 }
 
 #main-menu > li > a {
-    font-size: 24px;
-    color: #0000B7;
+    font-size: 22px;
+    color: #003980;
     text-decoration: none;
     letter-spacing: 0.1em;
     display: block;
-    padding: 15px 40px;
+    padding: 10px 40px;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
     text-align: center;
 }
@@ -50,13 +44,13 @@ body {              /* 바디 폰트 종류 */
 }
 
 #main-menu > li > a:hover {
-    color: #00B4DB;
+    color: #37ace2;
 }
 
 
 #sub-menu {             /* 하위 메뉴바 CSS */
     position: absolute;
-    background: #0000B7;
+    background: #003980;
     opacity: 0;
     visibility: hidden;
     margin: 0;
@@ -73,7 +67,7 @@ body {              /* 바디 폰트 종류 */
 #sub-menu > li > a {
     color: rgba(255,255,255,0.6);
     text-decoration: none;
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
     font-size: 18px;
 }
 
@@ -84,10 +78,15 @@ body {              /* 바디 폰트 종류 */
 
 table {              /* 게시판 */
     border-collapse: collapse;
-    width: 1100px;
-    height: 600px;
-    background-color: #FDFFFF;
+    width: auto;
+    height: auto;
     color: #363636;
+
+}
+
+tbody {
+    background-color: white;
+    opacity: 0.7;
 }
 
 #board-title {
@@ -96,14 +95,70 @@ table {              /* 게시판 */
 }
 
 #board-navi {
-    background-color: #EBF7FF;
-}
-
-tr {
-    border-bottom: 1px solid #A2A2A2;
+    background-color: blue;
 }
 
 
 footer {                /* 하단 저작권 명시 */
     text-align: center;
+}
+
+th {
+    border-bottom: 1px solid #A2A2A2;
+}
+td > a {
+    color: #525252;
+    text-decoration: none;
+    
+}
+td > a:hover {
+    color: #003980;
+    text-decoration: none;
+}
+
+h2 {
+    color:#003980;
+    
+}
+
+th {                /* 게시판 틀 제목 */
+    background-color: #003980;
+    color: white;
+    opacity: 0.7;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+#board-title-list {
+    text-align: left;
+}
+
+#show-date {
+    width: 550px;
+}
+
+h5 {
+    height: 68px;
+    font-size: 25px;
+    color: #003980;
+}
+
+#title-data-s {
+    font-size: 15px;
+    color: #525252;
+    margin-left: 640px;
+    margin-right: auto;
+}
+
+nav > ol > li > a {
+    color: #003980;
+    text-decoration: none;
+}
+
+nav > ol > li > a:hover {
+    color: #37ace2;
+    text-decoration: none;
 }
