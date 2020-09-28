@@ -16,34 +16,13 @@ body {
     margin: 0; padding: 0;
 }
 
-.login-box {
-  width: 100%;
-  text-align: right;
-  color: white;
-  text-decoration: none;
-  text-align: right;
-}
-
-.login {
-  margin: 10px 10px 10px 10px;
-  padding: 10px 10px 10px 10px;
-  font-family: 'Nanum Gothic', sans-serif;
-  text-align: right;
-  width: 100%;
-}
-
-.login > .login-box > a {
-  color: white;
-  text-decoration: none;
-  text-align: right;
-}
-
 #login-box {
-  margin: 10px;
-  margin-right: 30px;
+  text-align: right;
+  margin: 20px;
+  height: 70px;
 }
 
-#login-box > a {
+#login > a {
   color: white;
   text-decoration: none;
   text-align: right;
@@ -58,21 +37,83 @@ body {
   text-align: center;
 }
 
+#welcome {
+  background-color: white;
+  opacity: 0.7;
+  padding: 18px;
+  font-size: 24px;
+  margin-top: 30px;
+  margin-left: 45px;
+  margin-right: 45px;
+  border-radius: 1em;
+}
+
+#welcome > a {
+  text-decoration: none;
+  color: #003980;
+}
+
+#rap {
+  text-align: center;
+}
+
+#btn {
+  display: inline-block;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  color: rgba(24, 65, 131, 0.7);
+  transition: all 0.7s ease-out;
+  background: linear-gradient(270deg, rgba(43, 117, 235, 0.8), rgba(24, 65, 131, 0.8), rgba(34,34,34,0), rgba(34,34,34,0));
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+  border: 2px solid white;
+  padding: 18px;
+  font-size: 24px;
+  margin-top: 30px;
+  margin-left: 45px;
+  margin-right: 45px;
+  border-radius: 1em;
+}
+
+#btn:hover {
+  color: #fff;
+  border: 1px solid rgba(0,56,144,0);
+  color: white;
+  background-position: 99% 50%;
+  text-decoration: none;
+}
+
+#btn > a {
+  text-decoration: none;
+  color: white;
+}
  </style> 
 </head>
 
 
 
 <body>
-  <span class="login" height="70px">
-    <div id="login-box">
-      <a href="#">로그인</a>
-      &nbsp;&nbsp;
-      <a href="#">회원가입</a>
-    </div>
-  </span>
+  <div id="login-box">
+  <div style="display: inline-block" id="login"><a href="#">로그인</a></div>
+  &nbsp;&nbsp;
+  <div style="display: inline-block" id="login"><a href="#">회원가입</a></div>
+  </div>
+
   <div id="logo-box1"><img src="images/intro_logo.png" width="260px" height="224px"></div>
-  <div id="logo-box2"> <a href="/posts"><img src="images/intro_logo2.png" width="323px" height="99px"></a></div>
-  <a href="/posts">들어가기이이이</a>
+  <div id="logo-box2"> <img src="images/intro_logo2.png" width="323px" height="99px"></div>
+  <div id="rap">
+    <div id="btn"><a href="/posts/new">건의하기<a></div>
+      <div id="btn"><a href="/posts/">목록보기<a></div>
+  </div>
+
+
 </body>
 </html>
+
+
+
