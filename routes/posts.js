@@ -5,12 +5,14 @@ var Post = require('../models/Post');
 // Index
 router.get('/', function(req, res){
   Post.find({})
+    .populate('author') // 1
     .sort('-createdAt')
     .exec(function(err, posts){
       if(err) return res.json(err);
       res.render('posts/index', {posts:posts});
     });
 });
+
 
 // New
 router.get('/new', function(req, res){
@@ -19,18 +21,25 @@ router.get('/new', function(req, res){
 
 // create
 router.post('/', function(req, res){
+  req.body.author = req.user._id; // 2
   Post.create(req.body, function(err, post){
-    if(err) return res.json(err);
+    if(err){
+      req.flash('post', req.body);
+      req.flash('errors', util.parseError(err));
+      return res.redirect('/posts/new');
+    }
     res.redirect('/posts');
   });
 });
 
 // show
 router.get('/:id', function(req, res){
-  Post.findOne({_id:req.params.id}, function(err, post){
-    if(err) return res.json(err);
-    res.render('posts/show', {post:post});
-  });
+  Post.findOne({_id:req.params.id}) // 3
+    .populate('author')             // 3
+    .exec(function(err, post){      // 3
+      if(err) return res.json(err);
+      res.render('posts/show', {post:post});
+    });
 });
 
 // edit
