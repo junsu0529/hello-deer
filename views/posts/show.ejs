@@ -34,19 +34,9 @@
           <a class="btn btn-danger btn-sm" href="javascript:void(0)" id="btns" onclick="confirm('글을 삭제하시겠습니까?')?this.parentElement.submit():null;">삭제</a>
         </form>
       </div>
-
-      <div class="post-info card m-2 p-2">
-        <div class="border-bottom pb-1 mb-1"> <!-- 1 -->
-          <span>Author</span> : <%= post.author ? post.author.username : "" %>
-          <div><span>Views</span> : <span><%= post.views %></span></div>
-        </div>
-        <div><span>Created</span> : <span data-date-time="<%= post.createdAt %>"><%= post.createdAt %></span></div>
-        <% if(post.updatedAt) { %>
-          <div><span>Updated</span> : <span data-date-time="<%= post.updatedAt %>"><%= post.updatedAt %></span></div>
-        <% } %>
-      </div>
-
-    </div>
-    <%- include('../partials/footer') %>
+<%= post.author ? post.author.username : "" %>
+<% if(post.updatedAt) { %>
+<% } %>
+<%- include('../partials/footer') %>
   </body>
 </html>
