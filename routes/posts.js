@@ -34,13 +34,14 @@ router.post('/', function(req, res){
 
 // show
 router.get('/:id', function(req, res){
-  Post.findOne({_id:req.params.id}) // 3
-    .populate('author')             // 3
-    .exec(function(err, post){      // 3
-      if(err) return res.json(err);
-      res.render('posts/show', {post:post});
-    });
+  Post.findOne({_id:req.params.id}, function(err, post){
+    if(err) return res.json(err);
+    post.view++;
+    post.save();
+    res.render('posts/show', {post:post});
+  });
 });
+
 
 // edit
 router.get('/:id/edit', function(req, res){
