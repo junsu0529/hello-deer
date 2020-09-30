@@ -25,9 +25,16 @@
 
         <div class="form-group" id="new-title">
           <label for="body">내용</label>
-            <textarea id="body" name="body" rows="5" class="form-control"><%= post.body %></textarea>
+          <textarea id="body" name="body" rows="5" class="form-control <%= (errors.body)?'is-invalid':'' %>"><%= post.body %></textarea>
+          <% if(errors.body){ %>
+            <span class="invalid-feedback"><%= errors.body.message %></span>
+          <% } %>
         </div>
-
+        <% if(errors.unhandled){ %>
+                  <div class="invalid-feedback b-block">
+                    <%= errors.unhandled %>
+                  </div>
+                <% } %>
         <div>
           <a class="btn btn-outline-primary" href="/posts/<%= post._id %>" id="new-back">취소</a>
           <button type="submit" class="btn btn-primary" id="new-submit">등록</button>
