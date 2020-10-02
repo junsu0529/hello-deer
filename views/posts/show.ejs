@@ -16,9 +16,8 @@
       </nav>
 
       <div class="card">
-        <h5 class="card-header p-3"><%= post.title %></h5>
-        <% if(post.updatedAt) { %>
-        <% } %>
+        <h5 class="card-header p-3" id="card-title-head"><%= post.title %></h5>
+        <div class="ellipsis"><%= post.author ? post.author.username : "" %></div>
         <span data-date-time="<%= post.createdAt %>" id="title-data-s"></span>
         <div class="row">
           <div class="col-md-7 col-lg-8 col-xl-12 order-sm-2 order-md-1">

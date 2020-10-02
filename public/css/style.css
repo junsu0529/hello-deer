@@ -16,7 +16,7 @@ body {
     top: 15px;
     right: 20px;
   }
-  
+
   #login > a {
     color: white;
     text-decoration: none;
@@ -126,7 +126,7 @@ th {
 td > a {
     color: #525252;
     text-decoration: none;
-    
+
 }
 td > a:hover {
     color: #003980;
@@ -135,7 +135,7 @@ td > a:hover {
 
 h2 {
     color:#003980;
-    
+
 }
 
 th {                /* 게시판 틀 제목 */
@@ -177,6 +177,14 @@ h5 {
     text-align: right;
 }
 
+#title-author-s {
+    font-size: 15px;
+    color: #525252;
+    margin-right: 40px;
+    margin-top: 5px;
+    text-align: right;
+}
+
 
 #board-mini-nav:hover {
     color: #37ace2;
@@ -188,7 +196,7 @@ h5 {
     text-decoration: none;
 }
 
-#new-btn, #new-submit, #new-back, #btns {
+#new-btn, #new-submit, #new-back, #btns, #newuser-btn, #login-btn {
     font-size: 13px;
 }
 
@@ -213,7 +221,7 @@ h5 {
 #login-a {
     position: absolute;
     top: 10px;
-    right: 100px;
+    right: 80px;
 }
 
 #login-b {
@@ -244,6 +252,63 @@ h5 {
     text-decoration: none;
 }
 
+
+#login-c {
+    position: absolute;
+    top: 10px;
+    right: 100px;
+}
+
+#login-d {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+#login-c > a {
+    color: white;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+#login-d > a {
+    color: white;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+#login-c > a:hover {
+    color: #003980;
+    text-decoration: none;
+}
+
+#login-d > a:hover {
+    color: #003980;
+    text-decoration: none;
+}
+
 .post-body {
     padding: 25px 35px 35px 35px;
+}
+
+#newuser-box {
+    width: 1000px;
+    position: absolute;
+    left: 25%;
+}
+
+#loginpage-box {
+    width: 800px;
+    position: absolute;
+    left: 32%;
+}
+
+#board-toomuch {
+  width: 500px nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#card-title-head {
+  height: auto;
 }

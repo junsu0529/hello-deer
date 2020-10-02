@@ -18,9 +18,15 @@
 
 <title>사향 건의함 - 게시판 페이지 [Hello, 사슴]</title>
 <div class="image-container">
-    <img src="/images/logo2.png" width="304px" height="125px" alt="">
-    <div style="display: inline-block" id="login-a" text-align="right"><a href="/login">로그인</a></div>
+    <a href="/posts"><img src="/images/logo2.png" width="304px" height="125px" alt=""></a>
+            <% if(isAuthenticated){ %> <!-- 1 -->
+    <div style="display: inline-block" id="login-a" text-align="right"><a href="/logout">로그아웃</a></div>
+        &nbsp;&nbsp;
+    <div style="display: inline-block" id="login-b" text-align="right"><a href="/users/<%= currentUser.username %>">내 정보</a></div>
+           <% } else { %>
+    <div style="display: inline-block" id="login-c" text-align="right"><a href="/login">로그인</a></div>
     &nbsp;&nbsp;
-    <div style="display: inline-block" id="login-b" text-align="right"><a href="/users/new">회원가입</a></div>
+    <div style="display: inline-block" id="login-d" text-align="right"><a href="/users/new">회원가입</a></div>
+            <% } %>
 </div>
 </div>

@@ -14,12 +14,12 @@
 
         <thead class="thead-light">
           <tr>
-            <th scope="col">번호</th>
-            <th scope="col">제목</th>
-            <th scope="col" class="author">게시자</th>
-            <th scope="col" class="date">게시일</th>
-            <th scope="col">조회수</th>
-            <th scope="col">추천수</th>
+            <th scope="col" width="50px">번호</th>
+            <th scope="col" width="500px">제목</th>
+            <th scope="col" class="author" width="100px">게시자</th>
+            <th scope="col" class="date" width="150px">게시일</th>
+            <th scope="col" width="75px">조회수</th>
+            <th scope="col" width="75px">추천수</th>
 
           </tr>
         </thead>
@@ -27,22 +27,17 @@
         <tbody>
           <% if(posts == null || posts.length == 0){ %>
             <tr>
-              <td colspan=100> There is no data to show :( </td>
+              <td colspan=6> There is no data to show :( </td>
             </tr>
           <% } %>
           <% posts.forEach(function(post) { %>
             <tr>
-              <td class="numId"><%= post.numId %></td>
-              <td>
-                <a href="/posts/<%= post._id %>"><div class="ellipsis"><%= post.title %></div></a>
-              </td>
-              <td class="author">
-                <div class="ellipsis"><%= post.author ? post.author.username : "" %></div>
-              </td>
-              <td class="date">
-                <span data-date="<%= post.createdAt %>"><%= post.createdAt %></span>
-              </td>
+              <td class="numId" width="20px"><%= post.numId %></td>
+              <td nowrap><a href="/posts/<%= post._id %>"><div class="ellipsis" id="board-toomuch"><%= post.title %></div></a></td>
+              <td class="author"><div class="ellipsis"><%= post.author ? post.author.username : "" %></div></td>
+              <td class="date"><span data-date="<%= post.createdAt %>"><%= post.createdAt %></span></td>
               <td class="views"><%= post.views %></td>
+              <td>추천수</td>
             </tr>
           <% }) %>
         </tbody>
