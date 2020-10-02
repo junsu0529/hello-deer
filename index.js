@@ -3,9 +3,9 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var MONGO_DB = 'mongodb+srv://junsuAdmin:wnstn05@deercluster.o9yl3.mongodb.net/DeerCluster?retryWrites=true&w=majority';
-var flash = require('connect-flash'); 
-var session = require('express-session'); 
-var passport = require('./config/passport'); 
+var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('./config/passport');
 var app = express();
 
 
