@@ -3,6 +3,7 @@ var Counter = require('./Counter');
 
 // schema
 var postSchema = mongoose.Schema({
+  category:{type:String},
   title:{type:String, required:[true,'Title is required!']},
   body:{type:String, required:[true,'Body is required!']},
   author:{type:mongoose.Schema.Types.ObjectId, ref:'user', required:true},
@@ -10,6 +11,7 @@ var postSchema = mongoose.Schema({
   numId:{type:Number},
   createdAt:{type:Date, default:Date.now},
   updatedAt:{type:Date},
+  likenum:{type:Number, default:0}
 });
 
 // 글 번호 카운트

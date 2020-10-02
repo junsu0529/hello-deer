@@ -29,13 +29,13 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
-app.use(flash()); // 2
-app.use(session({secret:'MySecret', resave:true, saveUninitialized:true})); //3
-// Passport // 2
+app.use(flash());
+app.use(session({secret:'MySecret', resave:true, saveUninitialized:true}));
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Custom Middlewares // 3
+// Custom Middlewares
 app.use(function(req,res,next){
   res.locals.isAuthenticated = req.isAuthenticated();
   res.locals.currentUser = req.user;
@@ -45,11 +45,10 @@ app.use(function(req,res,next){
 // Routes
 app.use('/', require('./routes/home'));
 app.use('/posts', require('./routes/posts'));
-app.use('/users', require('./routes/users'));//1
+app.use('/users', require('./routes/users'));
 
 // Port setting
 var port = 3000;
 app.listen(port, function(){ //3000번 포트에 node.js 서버 연결
   console.log('server on! http://localhost:'+port);
 });
-
