@@ -5,13 +5,25 @@ var util = require('../util'); // 1
 
 // Index
 router.get('/', function(req, res){
-  Post.find({})
-    .populate('author') // 1
-    .sort('-createdAt')
-    .exec(function(err, posts){
-      if(err) return res.json(err);
-      res.render('posts/index', {posts:posts});
+  let ctgr = req.query.category;
+  if(!ctgr){
+    Post.find({})
+      .populate('author')
+      .sort('-createdAt')
+      .exec(function(err, posts){
+        if(err) return res.json(err);
+        res.render('posts/index', {posts:posts});
+      });
+  }
+  else{
+    Post.find({category:ctgr})
+      .populate('author')
+      .sort('-createdAt')
+      .exec(function(err, posts){
+        if(err) return res.json(err);
+        res.render('posts/index', {posts:posts});
     });
+  }
 });
 
 
@@ -24,7 +36,7 @@ router.get('/new', function(req, res){
 
 // create
 router.post('/', function(req, res){
-  req.body.author = req.user._id; // 2
+  req.body.author = req.user._id;
   Post.create(req.body, function(err, post){
     if(err){
       req.flash('post', req.body);
@@ -37,14 +49,16 @@ router.post('/', function(req, res){
 
 // show
 router.get('/:id', function(req, res){
-  Post.findOne({_id:req.params.id}, function(err, post){
-    if(err) return res.json(err);
-    post.view++;
+  Post.findOne({_id:req.params.id}, function(req, post){
+    post.views++;
     post.save();
-    res.render('posts/show', {post:post});
-  });
+  })
+    .populate('author')
+    .exec(function(err, post){
+      if(err) return res.json(err);
+      res.render('posts/show', {post:post});
+    });
 });
-
 
 // edit
 router.get('/:id/edit', function(req, res){
@@ -83,5 +97,8 @@ router.delete('/:id', function(req, res){
     res.redirect('/posts');
   });
 });
+
+// nav
+
 
 module.exports = router;
