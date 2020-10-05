@@ -7,8 +7,12 @@
     <%- include('../partials/nav') %>
 <br><br>
     <div class="container mb-3">
+      <% if(ctgr){ %>
+        <h2 class="mb-3"><%= ctgr %></h2>
+      <% } else { %>
+        <h2 class="mb-3">전체글 보기</h2>
+      <% } %>
 
-      <h2 class="mb-3">게시판 이름</h2>
 
       <table class="board-table table table-sm border-bottom">
 
@@ -37,7 +41,7 @@
               <td class="author"><div class="ellipsis"><%= post.author ? post.author.username : "" %></div></td>
               <td class="date"><span data-date="<%= post.createdAt %>"><%= post.createdAt %></span></td>
               <td class="views"><%= post.views %></td>
-              <td>추천수</td>
+              <td class="views"><%= post.likenum %></td>
             </tr>
           <% }) %>
         </tbody>

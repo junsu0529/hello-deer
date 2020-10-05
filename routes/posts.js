@@ -6,14 +6,24 @@ var util = require('../util'); // 1
 // Index
 router.get('/', function(req, res){
   let ctgr = req.query.category;
+
   if(!ctgr){
     Post.find({})
       .populate('author')
       .sort('-createdAt')
       .exec(function(err, posts){
         if(err) return res.json(err);
-        res.render('posts/index', {posts:posts});
+        res.render('posts/index', {posts:posts, ctgr:''});
       });
+  }
+  else if(ctgr == '서록관'){
+    Post.find({category:['서록1관', '서록2관']})
+      .populate('author')
+      .sort('-createdAt')
+      .exec(function(err, posts){
+        if(err) return res.json(err);
+        res.render('posts/index', {posts:posts, ctgr:req.query.category});
+    });
   }
   else{
     Post.find({category:ctgr})
@@ -21,7 +31,7 @@ router.get('/', function(req, res){
       .sort('-createdAt')
       .exec(function(err, posts){
         if(err) return res.json(err);
-        res.render('posts/index', {posts:posts});
+        res.render('posts/index', {posts:posts, ctgr:ctgr});
     });
   }
 });

@@ -6,12 +6,13 @@
   <body>
     <%- include('../partials/nav') %>
 
+
     <div class="container mb-3">
 <br><br><br>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb p-1 pl-2 pr-2" id="show-nav">
           <li class="breadcrumb-item"><a href="/" id="board-mini-nav">전체글보기</a></li>
-          <li class="breadcrumb-item"><a href="/posts" id="board-mini-nav">게시판 이름</a></li>
+          <li class="breadcrumb-item"><a href="/posts/?category=<%=post.category%>" id="board-mini-nav"><%= post.category %></a></li>
         </ol>
       </nav>
 
