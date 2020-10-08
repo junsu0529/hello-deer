@@ -6,6 +6,7 @@ var MONGO_DB = 'mongodb+srv://junsuAdmin:wnstn05@deercluster.o9yl3.mongodb.net/D
 var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('./config/passport');
+var util = require('./util');
 var app = express();
 
 
@@ -44,8 +45,9 @@ app.use(function(req,res,next){
 
 // Routes
 app.use('/', require('./routes/home'));
-app.use('/posts', require('./routes/posts'));
+app.use('/posts', util.getPostQueryString, require('./routes/posts'));
 app.use('/users', require('./routes/users'));
+app.use('/comments', util.getPostQueryString, require('./routes/comments'));
 
 // Port setting
 var port = 3000;

@@ -1,10 +1,12 @@
 var express  = require('express');
 var router = express.Router();
 var Post = require('../models/Post');
-var util = require('../util'); // 1
+var User = require('../models/User');
+var Comment = require('../models/Comment');
+var util = require('../util');
 
 // Index
-router.get('/', function(req, res){
+router.get('/', async function(req, res){
   let ctgr = req.query.category;
   let align = req.query.align;
 
@@ -62,16 +64,21 @@ router.post('/', function(req, res){
 
 // show
 router.get('/:id', function(req, res){
-  Post.findOne({_id:req.params.id}, function(req, post){
-    post.views++;
-    post.save();
-  })
-    .populate('author')
-    .exec(function(err, post){
-      if(err) return res.json(err);
-      res.render('posts/show', {post:post});
+  var commentForm = req.flash('commentForm')[0] || { _id: null, form: {} };
+  var commentError = req.flash('commentError')[0] || { _id:null, parentComment: null, errors:{}};
+
+  Promise.all([
+      Post.findOne({_id:req.params.id}).populate({ path: 'author', select: 'username' }),
+      Comment.find({post:req.params.id}).sort('createdAt').populate({ path: 'author', select: 'username' })
+    ])
+    .then(([post, comments]) => {
+      var commentTrees = util.convertToTrees(comments, '_id','parentComment','childComments');                               //2
+      res.render('posts/show', { post:post, commentTrees:commentTrees, commentForm:commentForm, commentError:commentError}); //2
+    })
+    .catch((err) => {
+      return res.json(err);
     });
-});
+ });
 
 // edit
 router.get('/:id/edit', function(req, res){

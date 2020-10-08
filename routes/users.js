@@ -6,6 +6,7 @@ var User = require('../models/User');
 var util = require('../util'); // 1
 
 
+
 // Index // 1
 router.get('/', function(req, res){
   User.find({})
