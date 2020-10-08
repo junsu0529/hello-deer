@@ -6,11 +6,14 @@ var util = require('../util'); // 1
 // Index
 router.get('/', function(req, res){
   let ctgr = req.query.category;
+  let align = req.query.align;
+
+  if (!align){ align = '-createdAt'}
 
   if(!ctgr){
     Post.find({})
       .populate('author')
-      .sort('-createdAt')
+      .sort(align)
       .exec(function(err, posts){
         if(err) return res.json(err);
         res.render('posts/index', {posts:posts, ctgr:''});
