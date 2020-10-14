@@ -6,43 +6,6 @@ var Comment = require('../models/Comment');
 var util = require('../util');
 
 // Index
-//카테고리 기능 충돌
-router.get('/', async function(req, res){
-  let ctgr = req.query.category;
-  let align = req.query.align;
-
-  if (!align){ align = '-createdAt'}
-
-  if(!ctgr){
-    Post.find({})
-      .populate('author')
-      .sort(align)
-      .exec(function(err, posts){
-        if(err) return res.json(err);
-        res.render('posts/index', {posts:posts, ctgr:''});
-      });
-  }
-  else if(ctgr == '서록관'){
-    Post.find({category:['서록1관', '서록2관']})
-      .populate('author')
-      .sort('-createdAt')
-      .exec(function(err, posts){
-        if(err) return res.json(err);
-        res.render('posts/index', {posts:posts, ctgr:req.query.category});
-    });
-  }
-  else{
-    Post.find({category:ctgr})
-      .populate('author')
-      .sort('-createdAt')
-      .exec(function(err, posts){
-        if(err) return res.json(err);
-        res.render('posts/index', {posts:posts, ctgr:ctgr});
-    });
-  }
-});
-//여기까지 충돌합니다.
-
 router.get('/', async function(req, res){ // 1
   var page = Math.max(1, parseInt(req.query.page));   // 2
   var limit = Math.max(1, parseInt(req.query.limit)); // 2
