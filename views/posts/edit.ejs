@@ -16,7 +16,7 @@
         </ol>
       </nav>
 
-      <form action="/posts/<%= post._id %>?_method=put" method="post">
+      <form action="/posts/<%= post._id %>?_method=put<%= getPostQueryString(true) %>" method="post">
 
         <div class="form-group">
           <label for="title" id="new-title">제목</label>
@@ -36,7 +36,7 @@
                   </div>
                 <% } %>
         <div>
-          <a class="btn btn-outline-primary" href="/posts/<%= post._id %>" id="new-back">취소</a>
+          <<a class="btn btn-primary" href="/posts<%= getPostQueryString() %>" id="new-back">취소</a>
           <button type="submit" class="btn btn-primary" id="new-submit">등록</button>
         </div>
 

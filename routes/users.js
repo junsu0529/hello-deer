@@ -6,17 +6,6 @@ var User = require('../models/User');
 var util = require('../util'); // 1
 
 
-
-// Index // 1
-router.get('/', function(req, res){
-  User.find({})
-    .sort({username:1})
-    .exec(function(err, users){
-      if(err) return res.json(err);
-      res.render('users/index', {users:users});
-    });
-});
-
 // New
 router.get('/new', function(req, res){
   var user = req.flash('user')[0] || {};
@@ -37,7 +26,7 @@ router.post('/', function(req, res){
 });
 
 // show
-router.get('/:username', function(req, res){
+router.get('/:username', util.isLoggedin, checkPermission,function(req, res){
   User.findOne({username:req.params.username}, function(err, user){
     if(err) return res.json(err);
     res.render('users/show', {user:user});
@@ -45,7 +34,7 @@ router.get('/:username', function(req, res){
 });
 
 // edit
-router.get('/:username/edit', function(req, res){
+router.get('/:username/edit', util.isLoggedin, checkPermission, function(req, res){
   var user = req.flash('user')[0];
   var errors = req.flash('errors')[0] || {};
   if(!user){
@@ -60,7 +49,7 @@ router.get('/:username/edit', function(req, res){
 });
 
 // update
-router.put('/:username', function(req, res, next){
+router.put('/:username', util.isLoggedin, checkPermission, function(req, res, next){
   User.findOne({username:req.params.username})
     .select('password')
     .exec(function(err, user){
@@ -86,13 +75,6 @@ router.put('/:username', function(req, res, next){
 });
 
 
-// destroy
-router.delete('/:username', function(req, res){
-  User.deleteOne({username:req.params.username}, function(err){
-    if(err) return res.json(err);
-    res.redirect('/users');
-  });
-});
 
 module.exports = router;
 
@@ -112,4 +94,13 @@ function parseError(errors){
     parsed.unhandled = JSON.stringify(errors);
   }
   return parsed;
+}
+// private functions // 2
+function checkPermission(req, res, next){
+ User.findOne({username:req.params.username}, function(err, user){
+  if(err) return res.json(err);
+  if(user.id != req.user.id) return util.noPermission(req, res);
+
+  next();
+ });
 }
