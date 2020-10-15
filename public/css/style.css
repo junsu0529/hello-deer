@@ -324,8 +324,18 @@ h5 {
   display:none;
 }
 
-.comment-edit-enabled .comment-edit {
 .comment-edit-enabled .comment-edit,
 .comment-reply-enabled .comment-reply {
   display:inherit;
+}
+
+.post-index-tool {
+  max-width: 450px;
+}
+.post-index-tool input[type='text']{
+  max-width: 130px;
+}
+
+.highlighted {
+  background-color: yellow;
 }

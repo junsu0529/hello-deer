@@ -6,27 +6,37 @@ var Comment = require('../models/Comment');
 var util = require('../util');
 
 // Index
-router.get('/', async function(req, res){ // 1
-  var page = Math.max(1, parseInt(req.query.page));   // 2
-  var limit = Math.max(1, parseInt(req.query.limit)); // 2
-  page = !isNaN(page)?page:1;                         // 3
-  limit = !isNaN(limit)?limit:10;                     // 3
+router.get('/', async function(req, res){
+  var page = Math.max(1, parseInt(req.query.page));
+  var limit = Math.max(1, parseInt(req.query.limit));
+  page = !isNaN(page)?page:1;
+  limit = !isNaN(limit)?limit:10;
 
-  var skip = (page-1)*limit; // 4
-  var count = await Post.countDocuments({}); // 5
-  var maxPage = Math.ceil(count/limit); // 6
-  var posts = await Post.find({}) // 7
-    .populate('author')
-    .sort('-createdAt')
-    .skip(skip)   // 8
-    .limit(limit) // 8
-    .exec();
+  var searchQuery = createSearchQuery(req.query); // 1
 
-  res.render('posts/index', {
+  var skip = (page-1)*limit;
+ var maxPage = 0;
+ var searchQuery = await createSearchQuery(req.query);
+ var posts = [];
+
+ if(searchQuery) {
+   var count = await Post.countDocuments(searchQuery);
+   maxPage = Math.ceil(count/limit);
+   posts = await Post.find(searchQuery)
+     .populate('author')
+     .sort('-createdAt')
+     .skip(skip)
+     .limit(limit)
+     .exec();
+ }
+
+ res.render('posts/index', {
     posts:posts,
-    currentPage:page, // 9
-    maxPage:maxPage,  // 9
-    limit:limit       // 9
+    currentPage:page,
+    maxPage:maxPage,
+    limit:limit,
+    searchType:req.query.searchType, // 2
+    searchText:req.query.searchText  // 2
   });
 });
 
@@ -45,9 +55,9 @@ router.post('/', util.isLoggedin, function(req, res){
     if(err){
       req.flash('post', req.body);
       req.flash('errors', util.parseError(err));
-      return res.redirect('/posts/new'+res.locals.getPostQueryString()); // 1
+      return res.redirect('/posts/new'+res.locals.getPostQueryString());
     }
-    res.redirect('/posts'+res.locals.getPostQueryString(false, {page:1})); //2
+    res.redirect('/posts'+res.locals.getPostQueryString(false, { page:1, searchText:'' }));
   });
 });
 
@@ -57,17 +67,20 @@ router.get('/:id', function(req, res){
   var commentError = req.flash('commentError')[0] || { _id:null, parentComment: null, errors:{}};
 
   Promise.all([
-      Post.findOne({_id:req.params.id}).populate({ path: 'author', select: 'username' }),
+      Post.findOne({_id:req.params.id}, function(req, post){
+        post.views++;
+        post.save();
+      }).populate({ path: 'author', select: 'username' }),
       Comment.find({post:req.params.id}).sort('createdAt').populate({ path: 'author', select: 'username' })
     ])
     .then(([post, comments]) => {
-      var commentTrees = util.convertToTrees(comments, '_id','parentComment','childComments');                               //2
-      res.render('posts/show', { post:post, commentTrees:commentTrees, commentForm:commentForm, commentError:commentError}); //2
+      var commentTrees = util.convertToTrees(comments, '_id','parentComment','childComments');
+      res.render('posts/show', { post:post, commentTrees:commentTrees, commentForm:commentForm, commentError:commentError});
     })
     .catch((err) => {
       return res.json(err);
     });
- });
+});
 
 // edit
 router.get('/:id/edit', util.isLoggedin, checkPermission, function(req, res){
@@ -92,9 +105,9 @@ router.put('/:id', util.isLoggedin, checkPermission, function(req, res){
     if(err){
       req.flash('post', req.body);
       req.flash('errors', util.parseError(err));
-      return res.redirect('/posts/'+req.params.id+'/edit'+res.locals.getPostQueryString()); // 1
+      return res.redirect('/posts/'+req.params.id+'/edit'+res.locals.getPostQueryString());
     }
-    res.redirect('/posts/'+req.params.id+res.locals.getPostQueryString()); // 1
+    res.redirect('/posts/'+req.params.id+res.locals.getPostQueryString());
   });
 });
 
@@ -103,7 +116,7 @@ router.put('/:id', util.isLoggedin, checkPermission, function(req, res){
 router.delete('/:id', util.isLoggedin, checkPermission, function(req, res){
   Post.deleteOne({_id:req.params.id}, function(err){
     if(err) return res.json(err);
-    res.redirect('/posts'+res.locals.getPostQueryString()); // 1
+    res.redirect('/posts'+res.locals.getPostQueryString());
   });
 });
 
@@ -112,7 +125,7 @@ router.delete('/:id', util.isLoggedin, checkPermission, function(req, res){
 
 module.exports = router;
 
-// private functions // 1
+// private functions
 function checkPermission(req, res, next){
   Post.findOne({_id:req.params.id}, function(err, post){
     if(err) return res.json(err);
@@ -120,4 +133,33 @@ function checkPermission(req, res, next){
 
     next();
   });
+}
+
+async function createSearchQuery(queries){ // 4
+  var searchQuery = {};
+  if(queries.searchType && queries.searchText && queries.searchText.length >= 3){
+    var searchTypes = queries.searchType.toLowerCase().split(',');
+    var postQueries = [];
+    if(searchTypes.indexOf('title')>=0){
+      postQueries.push({ title: { $regex: new RegExp(queries.searchText, 'i') } });
+    }
+    if(searchTypes.indexOf('body')>=0){
+      postQueries.push({ body: { $regex: new RegExp(queries.searchText, 'i') } });
+    }
+    if(searchTypes.indexOf('author!')>=0){ // 2-1
+     var user = await User.findOne({ username: queries.searchText }).exec();
+     if(user) postQueries.push({author:user._id});
+   }
+   else if(searchTypes.indexOf('author')>=0){ // 2-2
+     var users = await User.find({ username: { $regex: new RegExp(queries.searchText, 'i') } }).exec();
+     var userIds = [];
+     for(var user of users){
+       userIds.push(user._id);
+     }
+     if(userIds.length>0) postQueries.push({author:{$in:userIds}});
+   }
+   if(postQueries.length>0) searchQuery = {$or:postQueries}; // 2-3
+   else searchQuery = null;                                  // 2-3
+ }
+ return searchQuery;
 }

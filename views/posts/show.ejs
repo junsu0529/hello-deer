@@ -18,20 +18,20 @@
 
       <div class="card">
         <h5 class="card-header p-3" id="card-title-head"><%= post.title %></h5>
-        <div class="ellipsis"><%= post.author ? post.author.username : "" %></div>
+        <div class="ellipsis" data-search-highlight="author"><%= post.author ? post.author.username : "" %></div>
         <span data-date-time="<%= post.createdAt %>" id="title-data-s"></span>
         <div class="row">
           <div class="col-md-7 col-lg-8 col-xl-12 order-sm-2 order-md-1">
-            <div class="post-body"><%= post.body %></div>
+            <div class="post-body" data-search-highlight="body"><%= post.body %></div>
           </div>
         </div>
       </div>
 
         <button type="button" class="btn btn-primary">추천</button>
       <div class="mt-3">
-        <a class="btn btn-primary" href="/posts<%= getPostQueryString() %>id="btns">뒤로가기</a>
+        <a class="btn btn-primary" href="/posts<%= getPostQueryString() %>" id="btns">뒤로가기</a>
         <% if(isAuthenticated && post.author && currentUser.id == post.author.id){ %>
-          <a class="btn btn-primary" href="/posts/<%= post._id %>/edit<%= getPostQueryString() %> id="btns">수정</a>
+          <a class="btn btn-primary" href="/posts/<%= post._id %>/edit<%= getPostQueryString() %>"id="btns">수정</a>
           <form action="/posts/<%= post._id %>?_method=delete<%= getPostQueryString(true) %>" method="post" class="d-inline">
             <a class="btn btn-danger btn-sm" href="javascript:void(0)" id="btns" onclick="confirm('글을 삭제하시겠습니까?')?this.parentElement.submit():null;">삭제</a>
           </form>
@@ -39,9 +39,6 @@
       </div>
 
       <h4 class="mt-3">Comments</h4>
-
-      <h4 class="mt-3">Comments</h4>
-
        <% if(commentTrees.length){ %>
          <div class="mt-3 border-bottom">
            <% commentTrees.forEach(function(comment) { %>

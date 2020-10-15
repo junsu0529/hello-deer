@@ -7,6 +7,7 @@
     <%- include('../partials/nav') %>
 <br><br>
 
+
       <table class="board-table table table-sm border-bottom">
 
         <thead class="thead-light">
@@ -30,8 +31,8 @@
           <% posts.forEach(function(post) { %>
             <tr>
               <td class="numId" width="20px"><%= post.numId %></td>
-              <td nowrap><a href="/posts/<%= post._id %><%= getPostQueryString() %>"><div class="ellipsis" id="board-toomuch"><%= post.title %></div></a></td>
-              <td class="author"><div class="ellipsis"><%= post.author ? post.author.username : "" %></div></td>
+              <td nowrap><a href="/posts/<%= post._id %><%= getPostQueryString() %>"><div data-search-highlight="title" class="ellipsis" id="board-toomuch"><%= post.title %></div></a></td>
+              <td class="author"><div data-search-highlight="author" class="ellipsis"><%= post.author ? post.author.username : "" %></div></td>
               <td class="date"><span data-date="<%= post.createdAt %>"><%= post.createdAt %></span></td>
               <td class="views"><%= post.views %></td>
               <td class="views"><%= post.likenum %></td>
@@ -76,9 +77,7 @@
         </ul>
       </nav>
 
-    </div>
-
-    <form action="/posts" method="get"> <!-- 4 -->
+    <form action="/posts" method="get" class="post-index-tool">
       <div class="form-row">
 
         <div class="form-group col-3">
@@ -89,11 +88,29 @@
             <option value="20" <%= limit==20?'selected':'' %>>20 posts</option>
           </select>
         </div>
+        <div class="form-group col-9"> <!-- 2 -->
+                    <label>Search</label>
+                    <div class="input-group">
+                      <select name="searchType" class="custom-select">
+                        <option value="title,body" <%= searchType=='title,body'?'selected':'' %>>Title, Body</option>
+                        <option value="title" <%= searchType=='title'?'selected':'' %>>Title</option>
+                        <option value="body" <%= searchType=='body'?'selected':'' %>>Body</option>
+                        <option value="author" <%= searchType=='author'?'selected':'' %>>Author</option>
+                      </select>
+                      <input minLength="3" type="text" name="searchText" value="<%= searchText %>">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit">search</button>
+                      </div>
+                    </div>
+                  </div>
+
 
       </div>
     </form>
 
+
   </div>
+
 
 
     </div>
