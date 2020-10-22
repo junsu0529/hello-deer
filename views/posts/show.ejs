@@ -11,15 +11,17 @@
 <br><br><br>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb p-1 pl-2 pr-2" id="show-nav">
-          <li class="breadcrumb-item"><a href="/" id="board-mini-nav">전체글보기</a></li>
+          <li class="breadcrumb-item"><a href="/posts" id="board-mini-nav">전체글보기</a></li>
           <li class="breadcrumb-item"><a href="/posts/?category=<%=post.category%>" id="board-mini-nav"><%= post.category %></a></li>
         </ol>
       </nav>
 
       <div class="card">
         <h5 class="card-header p-3" id="card-title-head"><%= post.title %></h5>
-        <div class="ellipsis" data-search-highlight="author"><%= post.author ? post.author.username : "" %></div>
-        <span data-date-time="<%= post.createdAt %>" id="title-data-s"></span>
+        <div id="show-data-author">
+        <span class="ellipsis" data-search-highlight="author">작성자 : <%= post.author ? post.author.username : "" %>｜</span>
+        <span data-date-time="<%= post.createdAt %>"></span>
+        </div>
         <div class="row">
           <div class="col-md-7 col-lg-8 col-xl-12 order-sm-2 order-md-1">
             <div class="post-body" data-search-highlight="body"><%= post.body %></div>
@@ -27,18 +29,20 @@
         </div>
       </div>
 
-        <button type="button" class="btn btn-primary">추천</button>
-      <div class="mt-3">
-        <a class="btn btn-primary" href="/posts<%= getPostQueryString() %>" id="btns">뒤로가기</a>
+
+      <div class="mt-3" width="900px">
+
+        <a class="btn btn-outline-primary" href="/posts<%= getPostQueryString() %>" id="btns">뒤로가기</a>
         <% if(isAuthenticated && post.author && currentUser.id == post.author.id){ %>
           <a class="btn btn-primary" href="/posts/<%= post._id %>/edit<%= getPostQueryString() %>"id="btns">수정</a>
           <form action="/posts/<%= post._id %>?_method=delete<%= getPostQueryString(true) %>" method="post" class="d-inline">
-            <a class="btn btn-danger btn-sm" href="javascript:void(0)" id="btns" onclick="confirm('글을 삭제하시겠습니까?')?this.parentElement.submit():null;">삭제</a>
+            <a class="btn btn-danger" href="javascript:void(0)" id="btns" onclick="confirm('글을 삭제하시겠습니까?')?this.parentElement.submit():null;">삭제</a>
           </form>
         <% } %>
+                <div class="float-right"><button type="button" class="btn pull-right btn-warning" id="btns">추천</button></div>
       </div>
-
-      <h4 class="mt-3">Comments</h4>
+<br><br>
+      <h4 class="mt-3 ml-2">댓글</h4>
        <% if(commentTrees.length){ %>
          <div class="mt-3 border-bottom">
            <% commentTrees.forEach(function(comment) { %>
@@ -52,7 +56,7 @@
          </div>
        <% } %>
 
-       <div class="mt-3">
+       <div class="mt-3 ml-2">
          <%- include('../partials/comment-form', {
            actionUrl:'/comments?postId=' + post._id,
            comment: {},
@@ -61,6 +65,7 @@
            parentComment: null, <!-- 2 -->
          }); %>
            </div>
+           <br><br>
 
          </div>
 <%- include('../partials/footer') %>

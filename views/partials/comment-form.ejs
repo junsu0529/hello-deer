@@ -19,13 +19,13 @@
       </div>
       <div class="col-4">
         <% if(comment._id){ %>
-          <button type="submit" class="btn btn-primary h-100 mr-2 pl-4 pr-4">Edit</button>
-          <a href="javascript:void(0)" onclick="$('#comment-<%= comment._id %>').removeClass('comment-edit-enabled')">Cancel</a>
+          <button type="submit" class="btn btn-primary h-100 mr-2 pl-4 pr-4">수정</button>
+          <a class="btn btn-outline-primary h-100 mr-2 pl-4 pr-4 pt-3" href="javascript:void(0)" onclick="$('#comment-<%= comment._id %>').removeClass('comment-edit-enabled')">취소</a>
         <% } else if(parentComment) {%> <!-- 4 -->
-          <button type="submit" class="btn btn-primary h-100 mr-2">Add Reply</button>
-          <a href="javascript:void(0)" onclick="$('#comment-<%= parentComment %>').removeClass('comment-reply-enabled')">Cancel</a>
+          <button type="submit" class="btn btn-primary h-100 mr-2 pl-3 pr-3">작성</button>
+          <a class="btn btn-outline-primary h-100 mr-2 pl-3 pr-3 pt-3" href="javascript:void(0)" onclick="$('#comment-<%= parentComment %>').removeClass('comment-reply-enabled')">취소</a>
         <% } else { %>
-          <button type="submit" class="btn btn-primary h-100 mr-2">Add Comment</button>
+          <button type="submit" class="btn btn-primary h-100 mr-2">작성</button>
         <% } %>
       </div>
     </div>

@@ -200,7 +200,11 @@ h5 {
     font-size: 13px;
 }
 
-#new-title, #new-body {
+#btns-good {
+  font-size: 13px;
+}
+
+#new-title, #new-body, #new-category {
     font-size: 23px;
 }
 
@@ -292,9 +296,8 @@ h5 {
 }
 
 #newuser-box {
-    width: 1000px;
-    position: absolute;
-    left: 25%;
+  width: 1000px;
+  margin-left: 400px;
 }
 
 #loginpage-box {
@@ -330,12 +333,69 @@ h5 {
 }
 
 .post-index-tool {
-  max-width: 450px;
+  max-width: 1200px;
 }
+
 .post-index-tool input[type='text']{
   max-width: 130px;
 }
 
 .highlighted {
   background-color: yellow;
+}
+
+#dropdownMenuButton {
+  font-size: 13px;
+}
+
+.dropdown-item {
+  font-size: 13px;
+}
+
+#arrange {
+  font-size: 13px;
+}
+
+#search-box {
+  border: 1px solid #D5D5D5;
+}
+
+#table-board {
+  max-width: 1200px;
+  margin: auto;
+}
+
+#board-foot {
+  position: relative;
+  left: 160px;
+}
+
+
+#board-foot1 {
+  max-width: 1200px;
+  margin: auto;
+}
+
+#kkk {
+  float: left;
+}
+
+#kkkk {
+  margin-left: 920px;
+}
+
+#show-data-author {
+  text-align: right;
+  margin-top: 3px;
+  margin-right: 7px;
+}
+
+#edit-user {
+  width: 1000px;
+  margin-left: 400px;
+}
+
+#user-show-page {
+  width: 800px;
+  margin-left: 500px;
 }

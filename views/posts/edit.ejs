@@ -7,15 +7,6 @@
     <%- include('../partials/nav') %>
     <br><br><br>
     <div class="container mb-3">
-
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb p-1 pl-2 pr-2">
-          <li class="breadcrumb-item"><a href="/" id="board-mini-nav">전체글 보기</a></li>
-          <li class="breadcrumb-item"><a href="/posts" id="board-mini-nav">게시판 이름</a></li>
-          <li class="breadcrumb-item"><a href="/posts/<%= post._id %>" id="edit-nav-title"><%= post.title %></a> [수정] </li>
-        </ol>
-      </nav>
-
       <form action="/posts/<%= post._id %>?_method=put<%= getPostQueryString(true) %>" method="post">
 
         <div class="form-group">
@@ -36,8 +27,8 @@
                   </div>
                 <% } %>
         <div>
-          <<a class="btn btn-primary" href="/posts<%= getPostQueryString() %>" id="new-back">취소</a>
-          <button type="submit" class="btn btn-primary" id="new-submit">등록</button>
+          <button type="submit" class="btn btn-primary" id="new-submit">수정</button>
+          <a class="btn btn-danger" href="/posts<%= getPostQueryString() %>" id="new-submit">취소</a>
         </div>
 
       </form>

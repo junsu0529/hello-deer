@@ -59,7 +59,7 @@
             <% } %>
           </div>
         </div>
-        <p>
+        <p><br>
           <small>*필수항목</small>
         </p>
 
@@ -68,12 +68,18 @@
             <%= errors.unhandled %>
           </div>
         <% } %>
+
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-sm" id="newuser-btn">가입</button>
+          <button type="submit" class="btn btn-primary" id="newuser-btn">가입</button>
+          <a class="btn btn-danger" id="btns" href="/posts">취소</a>
+        </div>
         </div>
       </form>
 
     </div>
   </div>
   </body>
+  <footer>
+      <%- include('../partials/footer') %>
+</footer>
 </html>
