@@ -10,18 +10,15 @@ body {
     margin: 0; padding: 0;
 }
 
-#login-box {
-    text-align: right;
-    position: relative;
-    top: 15px;
-    right: 20px;
-  }
+
 
   #login > a {
     color: white;
     text-decoration: none;
     text-align: right;
   }
+
+          /*  partials/nav.ejs  */
 
 #main-menu {                /* 메뉴바 여백 설정 및 점 제거 */
     list-style: none;

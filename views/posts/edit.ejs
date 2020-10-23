@@ -8,7 +8,8 @@
     <br><br><br>
     <div class="container mb-3">
       <form action="/posts/<%= post._id %>?_method=put<%= getPostQueryString(true) %>" method="post">
-
+          <%- include('../partials/select') %>
+          <br>
         <div class="form-group">
           <label for="title" id="new-title">제목</label>
           <input type="text" id="title" name="title" value="<%= post.title %>" class="form-control">
