@@ -66,7 +66,6 @@ nav {
     margin: 0;
     padding: 8px 26px;
     list-style-type: none;
-
 }
 
 #sub-menu > li {
@@ -91,7 +90,6 @@ table {              /* 게시판 */
     width: 900px;
     height: auto;
     color: #363636;
-
 }
 
 #board-title-list {
@@ -365,6 +363,7 @@ h5 {
 #board-foot {
   position: relative;
   left: 160px;
+  max-width: 1200px;
 }
 
 
