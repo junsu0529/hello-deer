@@ -10,18 +10,15 @@ body {
     margin: 0; padding: 0;
 }
 
-#login-box {
-    text-align: right;
-    position: relative;
-    top: 15px;
-    right: 20px;
-  }
+
 
   #login > a {
     color: white;
     text-decoration: none;
     text-align: right;
   }
+
+          /*  partials/nav.ejs  */
 
 #main-menu {                /* 메뉴바 여백 설정 및 점 제거 */
     list-style: none;
@@ -69,7 +66,6 @@ nav {
     margin: 0;
     padding: 8px 26px;
     list-style-type: none;
-
 }
 
 #sub-menu > li {
@@ -94,7 +90,6 @@ table {              /* 게시판 */
     width: 900px;
     height: auto;
     color: #363636;
-
 }
 
 #board-title-list {
@@ -368,6 +363,7 @@ h5 {
 #board-foot {
   position: relative;
   left: 160px;
+  max-width: 1200px;
 }
 
 

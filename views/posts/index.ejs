@@ -2,9 +2,10 @@
 <html>
   <head>
     <%- include('../partials/head') %>
+        <%- include('../partials/nav') %>
   </head>
   <body>
-    <%- include('../partials/nav') %>
+
 <br><br>
 
 
@@ -64,7 +65,7 @@
                           </select>
                           <input minLength="3" type="text" name="searchText" value="<%= searchText %>" id="search-box">
                           <div class="input-group-append">
-                            <button class="btn btn-secondary" type="submit">검색</button>
+                            <button class="btn btn-secondary" type="submit" id="btns">검색</button>
                           </div>
                         </div>
                       </div>
