@@ -12,23 +12,20 @@ router.get('/', async function(req, res){
   page = !isNaN(page)?page:1;
   limit = !isNaN(limit)?limit:10;
 
-  var searchQuery = createSearchQuery(req.query); // 1
-
   var skip = (page-1)*limit;
- var maxPage = 0;
- var searchQuery = await createSearchQuery(req.query);
- var posts = [];
+  var maxPage = 0;
+  var searchQuery = await createSearchQuery(req.query);
+  var posts = [];
 
- if(searchQuery) {
-   var count = await Post.countDocuments(searchQuery);
-   maxPage = Math.ceil(count/limit);
-   posts = await Post.find(searchQuery)
-     .populate('author')
-     .sort('-createdAt')
-     .skip(skip)
-     .limit(limit)
-     .exec();
- }
+  var count = await Post.countDocuments(searchQuery);
+  maxPage = Math.ceil(count/limit);
+  posts = await Post.find(searchQuery)
+    .populate('author')
+    .sort('-createdAt')
+    .skip(skip)
+    .limit(limit)
+    .exec();
+
 
  res.render('posts/index', {
     posts:posts,
@@ -120,8 +117,15 @@ router.delete('/:id', util.isLoggedin, checkPermission, function(req, res){
   });
 });
 
-// nav
-
+// like
+router.post('/:id', function(req, res){
+  console.log('포스트')
+  Post.findOne({_id: req.params.id}, function(req, res){
+    post.likenum++;
+    console.log('hi')
+    post.save();
+  });
+});
 
 module.exports = router;
 
@@ -137,9 +141,10 @@ function checkPermission(req, res, next){
 
 async function createSearchQuery(queries){ // 4
   var searchQuery = {};
+  var postQueries = [];
   if(queries.searchType && queries.searchText && queries.searchText.length >= 3){
     var searchTypes = queries.searchType.toLowerCase().split(',');
-    var postQueries = [];
+
     if(searchTypes.indexOf('title')>=0){
       postQueries.push({ title: { $regex: new RegExp(queries.searchText, 'i') } });
     }
@@ -158,8 +163,14 @@ async function createSearchQuery(queries){ // 4
      }
      if(userIds.length>0) postQueries.push({author:{$in:userIds}});
    }
-   if(postQueries.length>0) searchQuery = {$or:postQueries}; // 2-3
-   else searchQuery = null;                                  // 2-3
  }
+ if(queries.category==='서록관') {
+   postQueries.push({ category: ['서록1관', '서록2관' ]});
+ }
+ else if(queries.category) {
+   postQueries.push({ category: queries.category });
+ }
+ if(postQueries.length>0) searchQuery = {$or:postQueries};
+ else searchQuery = null;
  return searchQuery;
 }
